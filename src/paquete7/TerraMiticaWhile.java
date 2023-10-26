@@ -1,6 +1,3 @@
-
-
-
 // @author Lun
 
 package paquete7;
@@ -49,8 +46,7 @@ public class TerraMiticaWhile {
                 
                 peso = Leer.realDoblePositivo("Dime el peso");
                 
-                System.out.println("Dime la altura");
-                altura = sc.nextShort();
+                altura = (short) Leer.enteroPositivo("Dime la altura");
                 
                 
                 byte imc = Calculo.imc(peso, altura);
