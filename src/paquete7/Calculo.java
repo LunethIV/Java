@@ -4,12 +4,11 @@
 // @author Lun
 
 package paquete7;
-import java.util.Scanner;
 public class Calculo {
     
     public static byte imc (double peso, short altura){       
     
-        double imc = peso/ altura * altura;
+        double imc = peso / altura * altura;
         
         // Convertir imc a byte
         byte clasificacion = 0;

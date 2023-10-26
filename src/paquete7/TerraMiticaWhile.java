@@ -35,7 +35,7 @@ public class TerraMiticaWhile {
             int hora = sc.nextInt();          
         
         // El programa se ejecuta en bucle hasta completar el aforo siempre que esté en horario de apertura
-        while(aforo != 3000 && hora >= 8 && hora <= 19){            
+        while(aforo != 2 && hora >= 8 && hora <= 19){            
           
                 Leer.cadena("Buenos días, dime tu nombre");
                
@@ -92,8 +92,9 @@ public class TerraMiticaWhile {
                 if (edad >= 4 && edad < 12 && imc == 1){
                     niñosPesoInferior++;
                 }
-                else if (edad >= 4 && edad < 12 && imc == 4)
+                else if (edad >= 4 && edad < 12 && imc == 4){
                     niñosSobrepeso++;
+                }
                 // Calcular el peso de los adolescentes
                 if (edad >= 12 && edad <= 23 && imc == 2){
                     adolescentePesoNormal++;
