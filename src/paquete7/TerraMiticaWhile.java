@@ -32,10 +32,7 @@ public class TerraMiticaWhile {
             System.out.println("___________________________________________________");
 
             System.out.println("Dime la hora: (recepción: 8 a 19 a las 20 se cierra");
-            int hora = sc.nextInt();
-
-            // Este nextLine captura el enter para que no se vaya al de nombre
-            sc.nextLine();
+            int hora = sc.nextInt();          
         
         // El programa se ejecuta en bucle hasta completar el aforo siempre que esté en horario de apertura
         while(aforo != 3000 && hora >= 8 && hora <= 19){            
