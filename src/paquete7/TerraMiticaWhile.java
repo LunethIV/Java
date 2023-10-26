@@ -26,7 +26,6 @@ public class TerraMiticaWhile {
         int adolescentes = 0;
         int adultos = 0;
         int niñosPesoInferior = 0;
-        int pesoNormal = 0;
         int niñosSobrepeso = 0;
         int adolescentePesoNormal = 0;
         int adolescenteSobrepeso = 0;
@@ -45,21 +44,20 @@ public class TerraMiticaWhile {
         while(aforo != 3000 && hora >= 8 && hora <= 19){            
           
                 Leer.cadena("Buenos días, dime tu nombre");
-
-                System.out.println("¿Cúantos años tienes?");
-                int edad = sc.nextInt();
+               
+                int edad = Leer.enteroPositivo("¿Cúantos años tienes?");
                 
-                System.out.println("Introduce el peso");
-                peso = sc.nextDouble();
-                System.out.println("Introduce la altura");
+                peso = Leer.realDoblePositivo("Dime el peso");
+                
+                System.out.println("Dime la altura");
                 altura = sc.nextShort();
+                
                 
                 byte imc = Calculo.imc(peso, altura);
                   
                // Calcular precio de entradas y recaudación              
                // Niños
-                if (edad < 4){                            
-                    precioEntradaNiños = 0;
+                if (edad < 4){                                               
                     niños++;
                     aforo++;
                 } 
@@ -86,6 +84,8 @@ public class TerraMiticaWhile {
                     adultos++;
                     aforo++;
                 }
+                
+                //Calcular recaudación total
                 recaudacionTotal = (recaudacionNiños + recaudacionAdolescentes + recaudacionAdultos);
                 
                 // Calcular el peso de los niños
