@@ -31,19 +31,22 @@ public class TerraMiticaWhile {
         
             System.out.println("___________________________________________________");
 
-            System.out.println("Dime la hora: (recepción: 8 a 19 a las 20 se cierra");
+            System.out.println("Introduce la hora: (recepción: 8:00 a 19:00, a las 20:00 se cierra)");
             int hora = sc.nextInt();          
         
-        // El programa se ejecuta en bucle hasta completar el aforo siempre que esté en horario de apertura
-        while(aforo != 2 && hora >= 8 && hora <= 19){            
+        // Comprobar si está abierto
+        if (hora >= 8 && hora <= 19){
+                
+            // El programa se ejecuta en bucle hasta completar el aforo siempre que esté en horario de apertura
+            while(aforo != 3000){            
           
-                Leer.cadena("Buenos días, dime tu nombre");
+                Leer.cadena("Buenos días, introduce el nombre");
                
-                int edad = Leer.enteroPositivo("¿Cúantos años tienes?");
+                int edad = Leer.enteroPositivo("Introduce la edad: ");
                 
-                peso = Leer.realDoblePositivo("Dime el peso");
+                peso = Leer.realDoblePositivo("Introduce el peso: ");
                 
-                altura = (short) Leer.enteroPositivo("Dime la altura");
+                altura = (short) Leer.enteroPositivo("introduce la altura: ");
                 
                 
                 byte imc = Calculo.imc(peso, altura);
@@ -109,22 +112,24 @@ public class TerraMiticaWhile {
                 else if (edad > 23 && imc == 4){
                     adultosSobrepeso++;
                 }
-        }   
-    
-        System.out.println("Número de niños que han asistido: " + niños);
-        System.out.println("Número de niños con peso inferior al normal: " + niñosPesoInferior);
-        System.out.println("Número de niños con sobrepeso: " + niñosSobrepeso);
-        System.out.println("La recaudación por niños es: " + recaudacionNiños);
-        System.out.println("Número de adolescentes que han acudido: " + adolescentes);
-        System.out.println("Número de adolescentes con peso normal: " + adolescentePesoNormal);
-        System.out.println("Número de adolescentes con sobrepeso: " + adolescenteSobrepeso);
-        System.out.println("La recaudación por adolescentes es: " + recaudacionAdolescentes);
-        System.out.println("Número de adultos que ha asistido es: " + adultos);
-        System.out.println("Número de adultos con peso superior al normal: " + adultosPesoMayor);
-        System.out.println("Número de adultos con sobrepeso: " + adultosSobrepeso);
-        System.out.println("La recaudación por adultos es: " + recaudacionAdultos);
-        System.out.println("Total de personas que han entrado al parque: " + aforo);
-        System.out.println("Recaudación total: " + recaudacionTotal);
+            }
+   
+            System.out.println("Número de niños que han asistido: " + niños);
+            System.out.println("Número de niños con peso inferior al normal: " + niñosPesoInferior);
+            System.out.println("Número de niños con sobrepeso: " + niñosSobrepeso);
+            System.out.println("La recaudación por niños es: " + recaudacionNiños);
+            System.out.println("Número de adolescentes que han acudido: " + adolescentes);
+            System.out.println("Número de adolescentes con peso normal: " + adolescentePesoNormal);
+            System.out.println("Número de adolescentes con sobrepeso: " + adolescenteSobrepeso);
+            System.out.println("La recaudación por adolescentes es: " + recaudacionAdolescentes);
+            System.out.println("Número de adultos que ha asistido es: " + adultos);
+            System.out.println("Número de adultos con peso superior al normal: " + adultosPesoMayor);
+            System.out.println("Número de adultos con sobrepeso: " + adultosSobrepeso);
+            System.out.println("La recaudación por adultos es: " + recaudacionAdultos);
+            System.out.println("Total de personas que han entrado al parque: " + aforo);
+            System.out.println("Recaudación total: " + recaudacionTotal);
+        }else
+            System.out.println("Está cerrado");
     }
 }
 

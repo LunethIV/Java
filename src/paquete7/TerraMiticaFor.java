@@ -9,7 +9,7 @@ public class TerraMiticaFor {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
-        int aforoMax = 2;
+        int aforoMax = 3000;
         int bebés = 0;
         int niños = 0;
         int adolescentes = 0;
@@ -26,14 +26,13 @@ public class TerraMiticaFor {
         int adultosPesoSuperior = 0;
         int adultosSobrepeso = 0;
         
-        System.out.println("_______________________________________________________________________");
+                      System.out.println("_________________________________________________________");
         
         int hora = Leer.enteroPositivo("Dime la hora: el horario es de 8 a 19, a las 20 se cierra");
         
         // Comprobamos si estamos dentro del horario de apertura
         if (hora >= 8 && hora <= 19){
-          
-            
+                     
             // Iniciamos el bucle para registrar a la gente
             for (int i = 0; i < aforoMax; i++){
               
@@ -92,6 +91,9 @@ public class TerraMiticaFor {
               }
             }
         }
+        else
+            System.out.println("Está cerrado");
+        
         
         
         System.out.println("Número de niños que han asistido: " + niños);

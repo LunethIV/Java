@@ -8,7 +8,7 @@ public class Calculo {
     
     public static byte imc (double peso, short altura){       
     
-        double imc = peso / altura * altura;
+        double imc = peso / (altura/100.0 * altura/100.0);
         
         // Convertir imc a byte
         byte clasificacion = 0;
