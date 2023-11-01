@@ -17,29 +17,49 @@ public class MiClase {
     
     public static void menu (){
         System.out.println("---CALCULADORA SIMPLE---");
+        subrayado();
         System.out.println("1. Suma");
+        subrayado();
         System.out.println("2. Resta");
+        subrayado();
         System.out.println("3. Multiplicación");
+        subrayado();
         System.out.println("4. División");
+        subrayado();
         System.out.println("5. Salir");
+        subrayado();
     }
     
     public static int enteroEntre (String msg, int inferior, int superior){
         Scanner sc = new Scanner(System.in);
         
-        System.out.println(msg);
-        int valor = sc.nextInt();
+        String cadena;
+        int valor = 0;
         
-        while (valor < inferior || valor > superior){
-            System.out.println("El valor debe estar comprendido entre " + inferior + " y " + superior);
-            valor = sc.nextInt();
-        }
-            return valor;
+        System.out.println(msg);
+        
+        boolean esNumero = false;
+        do{
+            try{
+                cadena = sc.nextLine();
+                valor = Integer.parseInt(cadena);
+                esNumero = true;
+                while (valor < inferior || valor > superior){
+                    System.out.println("Error, el valor debe estar entre 1 y 5");
+                    valor = sc.nextInt();                    
+                }        
+            }catch(NumberFormatException e){
+                System.out.println("Error, introduce un número entero");
+            }
+        }while(!esNumero);
+        
+        return valor;
     }
     
     public static int entero (String msg){      
+       Scanner sc = new Scanner(System.in);
        
-       int num = Integer.parseInt(msg);
+       int num = sc.nextInt();
        
        return num;
     }
@@ -52,10 +72,9 @@ public class MiClase {
         
         int suma = num1 + num2;
         
-        System.out.println(suma);
+        System.out.println("La suma de " + num1 + " y " + num2 + " es: " + suma);
     }
     
-  
     
     public static void restar (){
         
@@ -64,7 +83,7 @@ public class MiClase {
         
         int resta = num1 - num2;
         
-        System.out.println(resta);
+        System.out.println("La resta de " + num1 + " y " + num2 + " es: " + resta);
     }
     
     public static void multiplicar (){
@@ -85,5 +104,5 @@ public class MiClase {
         double divi = num1 / num2;
         
         System.out.println(divi);
-    }
+    }    
 }
