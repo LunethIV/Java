@@ -16,12 +16,11 @@ public class Ej3 {
          
          
          int dia = Introducir.entero("Introduce el día");
-         
          System.out.println("Introduce el mes");
          String mes = sc.nextLine();
          
          for (int i = 0; i < dias.length; i++){
-             if (meses[i] == mes){
+             if (meses[i].equals(mes)){
                  total += dia;
                  break;
              }
