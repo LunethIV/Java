@@ -1,6 +1,7 @@
-
 package proyectoprog06_tarea6;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 public class Principal {
 
 
@@ -68,7 +69,7 @@ public class Principal {
         else{
             System.out.println("La letra 'W' no se encuentra en el texto");
         }
-        
+        System.out.println("______________________________________________");
         /* Ej4: Dado el texto del ejercicio 3, indicar si está la ‘T’ (en mayúscula o
                 minúscula), y las posiciones que ocupan (es necesario utilizar un
                 array).*/
@@ -80,13 +81,100 @@ public class Principal {
             if(letras == 't' || letras == 'T'){
                 correcto = true;
                 pos[i] = i;
+            }           
+            else{
+                pos[i] = -1;
             }
         }
-        if(correcto){
-            System.out.println("Se ha encontrado la letra 't' en las siguientes posiciones: " + pos);
+        
+        if(correcto == true){
+            for(int i = 0; i < pos.length; i++){
+                if(pos[i] != -1){
+                    System.out.println("Las posiciones de las T son: " + pos[i]);
+                }
+            }       
         }
         else{
-            System.out.println("No se ha encontrado la letra 't' en el texto");
+        System.out.println("No se ha encontrado la letra 't' en el texto");            
+        }
+        System.out.println("______________________________________________");
+        /* Ej5: Partiendo de la cadena String "En mi proxima vida, creere en la
+                reencarnacion" indica si se encuentra la subcadena “creere” */
+       
+        String cadena = "En mi proxima vida, creere en la reencarnacion";
+
+        boolean contiene = cadena.contains("creere");
+
+        System.out.println("La cadena contiene la subcadena 'creere': " + contiene);
+        System.out.println("______________________________________________");
+        /*Ej6: Introducir un texto e indicar si representa un número.*/
+              
+        String texto2 = Introducir.cadena("Introduce el texto para saber si representa un número");
+        
+        boolean esNumero = false;
+        
+        for(int i = 0; i < texto2.length(); i++){
+            char letras = texto2.charAt(i);
+            if(Character.isDigit(letras)){
+                esNumero = true;
+            }           
+        }
+        if(esNumero){
+            System.out.println("Sí, representa un número");
+        }
+        else{
+            System.out.println("No representa un número");
+        }
+        System.out.println("______________________________________________");
+        
+        // Comprobar si el NIF introducido es válido
+        String NIF = Introducir.cadena("Introduce el NIF");
+        Pattern nifPatern = Pattern.compile("[0-9]{8}[T R W A G M Y F P D X B N J Z S Q V H L C K E]");
+        Matcher matcherNIF = nifPatern.matcher(NIF);
+        
+        if(matcherNIF.matches()){
+            System.out.println("El NIF introducido es correcto");
+        }
+        else{
+            System.out.println("El NIF introducido es incorrecto");
+        }
+        System.out.println("______________________________________________");
+        
+        // Comprobar si un NIE es correcto
+        String NIE = Introducir.cadena("Introduce el NIE");
+        
+        // Creamos una expresión regular para un NIE válido
+        Pattern patternNIE = Pattern.compile("[XYZ][0-9]{7}[A-Z]");
+        
+        // Comprobamos que el NIE cumple con la expresión regular
+        Matcher matcherNIE = patternNIE.matcher(NIE);
+        
+        if(matcherNIE.matches()){
+            // El NIE es válido
+            System.out.println("El NIE es válido");
+            
+            // Calculamos la letra de control
+            char[] caracteres = NIE.toCharArray();
+            // Se calcula el resto de dividir la suma de los digitos por 23
+            int resto = 0;
+            
+            for(int i = 0; i < 7; i++){
+                resto += (caracteres[i] - '0');
+            }
+            
+            int letraControl = resto % 23;
+            
+            // Comprobamos si la letra de control coincide con la última letra del NIE
+            if(letraControl == NIE.charAt(8)){
+                // La letra de control es correcta
+                System.out.println("La letra de control es correcta");
+            }
+            else{
+                System.out.println("La letra de control es incorrecta");
+            }
+        }
+        else{
+            System.out.println("El NIE no es válido");
         }
     }
 }
