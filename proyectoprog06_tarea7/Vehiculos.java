@@ -41,7 +41,7 @@ public class Vehiculos {
 
             // Calculamos el IVA
             double iva = 0;
-            if (vehiculos[i][0] > 35000) {
+            if (vehiculos[i][1] > 35000) {
                 iva = 0.3;
             } else {
                 iva = 0.21;
@@ -49,24 +49,24 @@ public class Vehiculos {
 
             // Calculamos el descuento por tipo
             double descuentoTipo = 0;
-            if (vehiculos[i][1] == 1 && vehiculos[i][0] <= 15000) {
+            if (vehiculos[i][0] == 1 && vehiculos[i][1] <= 15000) {
                 descuentoTipo = iva / 2;
             }
 
             // Calculamos el sobrecosto por impuesto de rodamiento
             double sobrecosto = 0;
-            if (vehiculos[i][1] == 2 || vehiculos[i][1] == 3 && vehiculos[i][0] > 30000) {
+            if (vehiculos[i][0] == 2 || vehiculos[i][0] == 3 && vehiculos[i][1] > 30000) {
                 sobrecosto = 0.05;
             }
 
             // Calculamos el descuento adicional
             double descuentoAdicional = 0;
-            if (vehiculos[i][0] < 20000) {
+            if (vehiculos[i][1] < 20000) {
                 descuentoAdicional = 0.05 * vehiculos[i][0];
             }
 
             // Calculamos el valor final
-             valorFinal = vehiculos[i][0] * (1 + iva) - descuentoTipo + sobrecosto - descuentoAdicional;    
+             valorFinal = vehiculos[i][1] * (1 + iva) - descuentoTipo + sobrecosto - descuentoAdicional;    
              
              // Mostramos el valor final
             System.out.println("El valor final del vehículo " + (i + 1) + " es de " + valorFinal + "€.");
