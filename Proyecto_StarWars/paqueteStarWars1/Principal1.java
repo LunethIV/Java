@@ -6,30 +6,9 @@ public class Principal1 {
     public static void main(String[] args) {
         
         // a) Crea los personajes: luke, darthVader y yoda.
-        Personaje personaje1 = new Personaje();
-        Personaje personaje2 = new Personaje();
-        Personaje personaje3 = new Personaje();
-        
-        personaje1.setNombre("Luke");
-        personaje1.setSalud(500);
-        personaje1.setFisico(300);
-        personaje1.setFuerza(100);
-        personaje1.setNivel(2);
-        personaje1.setPh(1);
-        
-        personaje2.setNombre("Darth Vader");
-        personaje2.setSalud(500);
-        personaje2.setFisico(200);
-        personaje2.setFuerza(500);
-        personaje2.setNivel(3);
-        personaje2.setPh(4);
-        
-        personaje3.setNombre("Yoda");
-        personaje3.setSalud(400);
-        personaje3.setFisico(100);
-        personaje3.setFuerza(500);
-        personaje3.setNivel(4);
-        personaje3.setPh(5);
+        Personaje personaje1 = new Personaje("Luke", 500,300,100,2,1);
+        Personaje personaje2 = new Personaje("Darth Vader",500,200,500,3,4);
+        Personaje personaje3 = new Personaje("Yoda",400,100,500,4,5);        
         
         // b) Muestra los valores de los atributos de los 3 personajes.
         System.out.println("Valores de Luke");

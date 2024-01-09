@@ -13,6 +13,16 @@ public class Personaje {
    private int nivel;
    private int ph;
 
+    //Constructor
+    public Personaje(String nombre, int salud, int fisico, int fuerza, int nivel, int ph){
+        this.nombre=nombre;
+        this.salud=salud;
+        this.fisico=fisico;
+        this.fuerza=fuerza;
+        this.nivel=nivel;
+        this.ph=ph;
+    }
+   
     // Métodos
     public String getNombre(){ // Devuelve el nombre del personaje actual 
        return nombre;
