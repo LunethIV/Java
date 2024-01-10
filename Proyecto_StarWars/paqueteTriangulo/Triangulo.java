@@ -36,12 +36,6 @@ public class Triangulo {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -65,12 +59,16 @@ public class Triangulo {
         return area;
     }
     
-    /* public int perimetro(){
-        
-    }*/
+    public double perimetro(){
+        return this.base + this.altura + this.hipotenusa();
+    }
     
-    public int hipotenusa(){
-        
+    private double hipotenusa(){
+        return Math.hypot(this.altura, this.base);
+    }
+    
+    public double getHipotenusa(){
+        return this.hipotenusa();
     }
     
     public void duplicaTamaño(){
@@ -79,7 +77,7 @@ public class Triangulo {
     }
     
     public void ampliaTamaño(int tamaño){
-        this.altura *= tamaño;
-        this.base *= tamaño;
+        this.altura += tamaño;
+        this.base += tamaño;
     }
 }

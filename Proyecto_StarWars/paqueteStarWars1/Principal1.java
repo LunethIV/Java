@@ -8,8 +8,8 @@ public class Principal1 {
         // a) Crea los personajes: luke, darthVader y yoda.
         Personaje personaje1 = new Personaje("Luke", 500,300,100,2,1);
         Personaje personaje2 = new Personaje("Darth Vader",500,200,500,3,4);
-        Personaje personaje3 = new Personaje("Yoda",400,100,500,4,5);        
-        
+        Personaje personaje3 = new Personaje("Yoda",400,100,500,4,5);       
+               
         // b) Muestra los valores de los atributos de los 3 personajes.
         System.out.println("Valores de Luke");
         System.out.println("______________________");
@@ -74,10 +74,11 @@ public class Principal1 {
         // j) Muestra la salud de yoda.
         System.out.println("La salud de Yoda tras el ataque es: "+personaje3.getSalud());
         
-        // k) ¿yoda está vivo?
+        // k) ¿Yoda está vivo?
         if(personaje3.isVivo()){
             System.out.println("Yoda sigue vivo");
-        }else{
+        }
+        else{
             System.out.println("Yoda ha muerto");
         }
         

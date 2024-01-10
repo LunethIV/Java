@@ -72,7 +72,7 @@ public class Personaje {
         this.ph = ph;
     }
 
-   @Override
+    @Override
     public String toString(){ // Devuelve una cadena que contiene TODOS los atributos del personaje
         String cadena;
         cadena = "Nombre: "+nombre+"\nSalud: "+salud+"\nFisico: "+fisico+"\nFuerza: "+fuerza+"\nNivel: "+nivel+"\nPh: "+ph;
@@ -88,7 +88,7 @@ public class Personaje {
     }
     
     public int ataque_fuerza(){ //Devuelve un valor entero, sería 0 si los ph son 0 o negativo. Si son positivos, sería: Decrementar los puntos de habilidad en 1 y devolver el producto del nivel con la fuerza
-        // Devuelve 0 si el valor de ph es 0 o negativo y si no, resta 1 ph y calcula el producto de nivel y fuerza
+
         if(ph > 0){
             ph--;
             return nivel * fuerza;
