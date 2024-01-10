@@ -1,20 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package paqueteTriangulo;
 
-/**
- *
- * @author Lun
- */
 public class Principal2 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        // a) Crea los triángulos: t1 y t2
+        Triangulo t1 = new Triangulo(10,12);
+        Triangulo t2 = new Triangulo(7,5);
+        
+        // b) Muestra los valores de los dos triángulos (base, altura e hipotenusa).
+        System.out.println(t1.getBase());
+        System.out.println(t1.getAltura());
     }
     
 }
