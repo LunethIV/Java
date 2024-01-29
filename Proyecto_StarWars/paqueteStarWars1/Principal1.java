@@ -1,6 +1,8 @@
 
 package paqueteStarWars1;
 
+import paqueteStarWars1.Personaje;
+
 public class Principal1 {
 
     public static void main(String[] args) {
@@ -36,9 +38,7 @@ public class Principal1 {
         System.out.println("");
         
         // d) Daña la salud de luke con 10.
-        personaje1.defensa(10);
-        
-        System.out.println("");
+        personaje1.defensa(10);                
         
         /* e) Se produce un ataque físico de luke, con el valor generado daña la
               salud de darthVader. Intenta hacerlo en 1 sola línea ¿?. */

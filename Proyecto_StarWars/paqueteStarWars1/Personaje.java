@@ -1,5 +1,6 @@
-
 package paqueteStarWars1;
+
+import paqueteStarWars2.MisMetodos;
 
 public class Personaje {
    
@@ -12,7 +13,9 @@ public class Personaje {
    private int fuerza;
    private int nivel;
    private int ph;
-
+   private final int id;
+   private static int ContPersonajes = 0;
+   
     //Constructor
     public Personaje(String nombre, int salud, int fisico, int fuerza, int nivel, int ph){
         this.nombre=nombre;
@@ -21,6 +24,8 @@ public class Personaje {
         this.fuerza=fuerza;
         this.nivel=nivel;
         this.ph=ph;
+        ContPersonajes++;
+        this.id = ContPersonajes;       
     }
    
     // Métodos
@@ -72,19 +77,28 @@ public class Personaje {
         this.ph = ph;
     }
 
+    public int getId(){
+        return id;
+    }
+    
+    public static int getContPersonajes(){
+        return ContPersonajes;
+    }
+    
+
+    
     @Override
     public String toString(){ // Devuelve una cadena que contiene TODOS los atributos del personaje
         String cadena;
-        cadena = "Nombre: "+nombre+"\nSalud: "+salud+"\nFisico: "+fisico+"\nFuerza: "+fuerza+"\nNivel: "+nivel+"\nPh: "+ph;
+        cadena = "Nombre: "+nombre+"\nSalud: "+salud+"\nFisico: "+fisico+"\nFuerza: "+fuerza+"\nNivel: "+nivel+"\nPh: "+ph+ "\nid: "+id;
         return cadena;
     }
     
     public int ataque_fisico(){ // Devuelve un valor resultante del producto de un número al azar entre 0 y 2 (ambos incluidos) con el nivel del personaje actual
-       // Genera un número aleatorio entre 0 y 2 (ambos incluidos)
-       int ataque = (int) (Math.random() * 3);
        
-       // Devuelve el producto del nivel y físico con el número aleatorio
-       return ataque * nivel * fisico;
+       int Aleatorio = MisMetodos.generaNumAleatorio(2, 0);
+       
+       return Aleatorio * nivel * fisico;
     }
     
     public int ataque_fuerza(){ //Devuelve un valor entero, sería 0 si los ph son 0 o negativo. Si son positivos, sería: Decrementar los puntos de habilidad en 1 y devolver el producto del nivel con la fuerza

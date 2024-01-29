@@ -1,7 +1,7 @@
-
 package paqueteTriangulo;
 
 import paqueteStarWars1.Personaje;
+
 
 public class Principal2 {
 
