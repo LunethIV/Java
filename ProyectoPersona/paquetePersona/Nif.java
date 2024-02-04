@@ -1,7 +1,6 @@
 
 package paquetePersona;
 
-import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -12,7 +11,7 @@ public class Nif {
     private static final String LETRAS = "TRWAGMYFPDXBNJZSQVHLCKE";
     
     // Constructores
-    public Nif(String nif){
+    public Nif(String nif) throws IllegalArgumentException{
         // Eliminar espacios en blanco y convertir a mayúsculas
         String nifSinEspacios = nif.replace(" ","").toUpperCase();
         
@@ -32,16 +31,14 @@ public class Nif {
         
         
         // Validar coincidencia letra y resto
-        if(cadena.charAt(0) == LETRAS.charAt(1)){           
-            System.out.println("Son iguales ");          
-        }else{
-            throw new IllegalArgumentException("Error, las letras no coinciden");
+        if(cadena.charAt(0) != LETRAS.charAt(1)){           
+            throw new IllegalArgumentException("Error, las letras no coinciden");         
         }
         
         // Asignar valores a los atributos
         this.nif = nifSinEspacios;
     }
-    
+    // Constructor que recibe un valor entero en lugar de una cadena
     public Nif(int dni){
         // Obtener el resto de la división por 23
         int resto = dni % 23;
@@ -52,7 +49,7 @@ public class Nif {
         // Formar DNI completo (con valueOf se convierte un int a String)
         String nif = String.valueOf(dni)+letra;
     }
-    
+    // Constructor que recibe otro nif como entrada
     public Nif(Nif other){   
         this.nif = other.nif;
     }
@@ -68,10 +65,39 @@ public class Nif {
     }
 
     public void setNif(String nif) throws IllegalArgumentException{
+        // Quitar espacios
+        String sinEspacios = nif.replace(" ", "");
+        
+        // Patrón de expresión regular para NIF
+        String patronNif = "^[0-9]{8}[A-Z]$";
+        Pattern pattern = Pattern.compile(patronNif);
+        Matcher matcher = pattern.matcher(sinEspacios);
+        
+        // Validar formato NIF
+        if(!matcher.matches()){
+            throw new IllegalArgumentException("Error, los datos introducidos no cumplen 8dígitos-máximoLETRA");
+        }
+        
+        // Extraer letra y calcular resto de la división por 23
+        String cadena = sinEspacios.substring(8);
+        int resto = Integer.parseInt(sinEspacios.substring(0,8)) % 23;
+               
+        // Validar coincidencia letra y resto
+        if(cadena.charAt(0) != LETRAS.charAt(1)){           
+            throw new IllegalArgumentException("Error, las letras no coinciden");         
+        }
         
         this.nif = nif;
     }
 
+    public void setNif(int dni){
+        String dniCadena = String.valueOf(dni);
+        
+        String letra = calcularLetra(dni);
+        
+        this.nif = dniCadena + letra;
+    }
+    
     @Override
     public String toString() {
         return "Nif{" + "nif=" + nif + '}';
