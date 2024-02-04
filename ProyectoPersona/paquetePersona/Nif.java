@@ -31,13 +31,14 @@ public class Nif {
         
         
         // Validar coincidencia letra y resto
-        if(cadena.charAt(0) != LETRAS.charAt(1)){           
+        if(cadena.charAt(0) != LETRAS.charAt(resto)){           
             throw new IllegalArgumentException("Error, las letras no coinciden");         
         }
         
         // Asignar valores a los atributos
         this.nif = nifSinEspacios;
     }
+    
     // Constructor que recibe un valor entero en lugar de una cadena
     public Nif(int dni){
         // Obtener el resto de la división por 23
@@ -47,15 +48,15 @@ public class Nif {
         char letra = LETRAS.charAt(resto);
         
         // Formar DNI completo (con valueOf se convierte un int a String)
-        String nif = String.valueOf(dni)+letra;
+        this.nif = String.valueOf(dni)+letra;
     }
+    
     // Constructor que recibe otro nif como entrada
     public Nif(Nif other){   
         this.nif = other.nif;
     }
     
     // Getters y setters
-
     public String getNif() {
         return nif;
     }
@@ -83,7 +84,7 @@ public class Nif {
         int resto = Integer.parseInt(sinEspacios.substring(0,8)) % 23;
                
         // Validar coincidencia letra y resto
-        if(cadena.charAt(0) != LETRAS.charAt(1)){           
+        if(cadena.charAt(0) != LETRAS.charAt(resto)){           
             throw new IllegalArgumentException("Error, las letras no coinciden");         
         }
         
