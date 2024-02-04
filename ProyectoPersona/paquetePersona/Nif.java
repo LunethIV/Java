@@ -31,8 +31,8 @@ public class Nif {
         int resto = Integer.parseInt(nifSinEspacios.substring(0,8)) % 23;
         
         
-        // Validar coincidencia letra y resto       
-        if(!cadena.equals(LETRAS.substring(resto))){           
+        // Validar coincidencia letra y resto
+        if(cadena.charAt(0) == LETRAS.charAt(1)){           
             System.out.println("Son iguales ");          
         }else{
             throw new IllegalArgumentException("Error, las letras no coinciden");
