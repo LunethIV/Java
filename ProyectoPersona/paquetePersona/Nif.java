@@ -98,6 +98,10 @@ public class Nif {
         this.nif = dniCadena + letra;
     }
     
+    public void setNif(Nif other){
+        this.nif = other.nif;
+    }
+    
     @Override
     public String toString() {
         return "Nif{" + "nif=" + nif + '}';
