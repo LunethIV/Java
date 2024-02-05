@@ -107,7 +107,6 @@ public class Nif {
     public String toString() {
         return "Nif{" + "nif=" + nif + '}';
     }
-
     
     public boolean equals(Nif other) {
         return this.nif.equals(other.nif);
