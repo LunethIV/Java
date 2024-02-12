@@ -21,6 +21,7 @@ public class Hombre extends Vertebrado{
         this.nombre = nombre;
         this.vivo = vivo;
         this.datosHijos = datosHijos;
+        numHijos = datosHijos.size();
     }
 
     public Hombre(String nombre, boolean vivo, int numVertebras, double peso, LocalDate fechaNac){
@@ -49,6 +50,7 @@ public class Hombre extends Vertebrado{
         this.nombre = nombre;
         this.vivo = vivo;
         this.datosHijos = hijos;
+        numHijos = hijos.size();
     }
     
     public Hombre(String nombre, boolean vivo, Vertebrado vertebrado){
@@ -109,7 +111,7 @@ public class Hombre extends Vertebrado{
         int edadMenor = -1;
         LocalDate tiempoActual = LocalDate.now();
         
-        if(datosHijos.size() <= 0){
+        if(!datosHijos.isEmpty()){
             for(Hijo hijo: datosHijos){
                 LocalDate añoNacimiento = hijo.getFechaNac();
                 Period diferencia = Period.between(añoNacimiento, tiempoActual); // No da la diferencia en años

@@ -48,6 +48,6 @@ public class Hijo {
     
     @Override
     public String toString(){
-        return "Nombre hijo: "+this.nombre+"Nacimiento hijo: "+fechaNac+"Edad: "+Edad();
+        return "\nNombre hijo: "+this.nombre+" \nNacimiento hijo: "+fechaNac+" \nEdad: "+Edad();
     }
 }
