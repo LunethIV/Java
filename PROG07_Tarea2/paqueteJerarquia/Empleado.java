@@ -2,6 +2,7 @@
 package paqueteJerarquia;
 import paqueteOtros.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Empleado {
     
@@ -28,5 +29,12 @@ public class Empleado {
         this.sueldo = 0;
     }
     
-    
+    // Métodos
+    public String tiempoEmpresa(){
+        LocalDate fechaActual = LocalDate.now();
+        
+        Period tiempo = Period.between(fechaTrabajo, fechaActual);
+        
+                       
+    }
 }
