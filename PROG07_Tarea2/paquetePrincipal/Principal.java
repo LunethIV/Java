@@ -1,20 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package paquetePrincipal;
 
-/**
- *
- * @author Lun
- */
+import java.time.LocalDate;
+import paqueteOtros.*;
+import paqueteJerarquia.*;
 public class Principal {
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
+        GestionRRHH a = new GestionRRHH("Empresa");
+        EmpleadoFijo e = new EmpleadoFijo(new Nif("75941838R"), null, "sd", "gf", LocalDate.now(), LocalDate.now());
+        
+        a.addEmpleado(e);
+        
+        
+        
+        e.calculaSueldo(3);
+        System.out.println("Sueldo: "+a.sueldoSemanalPlantilla());
+    }   
 }
