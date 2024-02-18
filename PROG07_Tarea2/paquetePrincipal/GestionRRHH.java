@@ -2,6 +2,7 @@
 package paquetePrincipal;
 import java.util.ArrayList;
 import paqueteJerarquia.*;
+import paqueteOtros.*;
 
 public class GestionRRHH {
     
@@ -36,11 +37,96 @@ public class GestionRRHH {
         }
     }
     
+    
     public int sueldoSemanalPlantilla(){
         int salarioTotal = 0;
         for(Empleado empleado:empleados){
             salarioTotal += empleado.calculaSueldo();
         }
         return salarioTotal;
+    }
+    
+    public boolean busquedaEmpleadoNif(Nif nif){
+        for(Empleado empleado:empleados){
+            if(empleado.getNif() == nif){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean busquedaEmpleadoNie(Nie nie){
+        
+        for(Empleado empleado:empleados){
+            if(empleado.getNie() != null && empleado.getNie().equals(nie)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void listadoOrganizadoPlantilla(){
+        ArrayList<Empleado> empleadosFijos = new ArrayList<>();
+        ArrayList<Empleado> empleadosHoras = new ArrayList<>();
+        ArrayList<Empleado> empleadosComisiones = new ArrayList<>();
+        
+        for(Empleado empleado:empleados){
+            if(empleado instanceof EmpleadoFijo){
+                empleadosFijos.add(empleado);               
+            }else if(empleado instanceof EmpleadoHoras){
+                empleadosHoras.add(empleado);
+            }else{
+                empleadosComisiones.add(empleado);
+            }
+        }
+        
+        if(!empleadosFijos.isEmpty()){
+            System.out.println("EmpleadosFijos: "+empleadosFijos);
+        }
+        
+        if(!empleadosHoras.isEmpty()){
+            System.out.println("EmpleadoHoras: "+empleadosHoras);
+        }
+      
+        if(!empleadosComisiones.isEmpty()){
+            System.out.println("EmpleadoComisiones: "+empleadosComisiones);
+        }
+    }
+
+    public void listadoAntiguedadPlantilla(){
+        for(Empleado empleado:empleados){
+            System.out.println("Nombre: "+empleado.getNombre()+
+            "\nApellidos: "+empleado.getApellidos()+
+            "\nTiempo en la empresa: "+empleado.tiempoEmpresa());
+        }
+    }
+    
+    @Override
+    public String toString(){
+        String info = "Empresa: "+ empresa;
+        if(empleados.isEmpty()){
+            info += " SIN EMPLEADOS";
+        }else{
+            for(Empleado empleado:empleados){
+                info += "\n" + empleados.toString();
+            }
+        }
+        return info;
+    }
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public ArrayList<Empleado> getEmpleados() {
+        return empleados;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
+    public void setEmpleados(ArrayList<Empleado> empleados) {
+        this.empleados = empleados;
     }
 }

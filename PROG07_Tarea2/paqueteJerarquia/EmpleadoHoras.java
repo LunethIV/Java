@@ -22,11 +22,12 @@ public class EmpleadoHoras extends Empleado{
     }
     
     // Métodos   
-    public int calculaSueldo(int horasTrabajadas){
-        if(horasTrabajadas > 40){
-         return super.sueldo = PAGO_HORA * 40 + (horasTrabajadas - 40) * PAGO_EXTRA;
+    @Override
+    public int calculaSueldo(){
+        if(numHoras > 40){
+         return PAGO_HORA * 40 + (numHoras - 40) * PAGO_EXTRA;
         }else{
-            return super.sueldo = PAGO_HORA * horasTrabajadas;
+            return PAGO_HORA * numHoras;
         }
     }
     

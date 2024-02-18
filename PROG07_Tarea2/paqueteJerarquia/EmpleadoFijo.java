@@ -1,6 +1,6 @@
 
 package paqueteJerarquia;
-
+import java.time.Period;
 import java.time.LocalDate;
 import paqueteOtros.Nie;
 import paqueteOtros.Nif;
@@ -17,12 +17,15 @@ public class EmpleadoFijo extends Empleado {
     }
     
     // Métodos públicos
-    public int trienios(int numAños){
-        return numAños / 3;
+    public int trienios(){
+        Period numAños = Period.between(this.fechaTrabajo,LocalDate.now());
+        
+        return numAños.getYears() / 3;
     }
  
-    public int calculaSueldo(int numAños){
-        return super.sueldo = EmpleadoFijo.SALARIO_SEMANAL + trienios(numAños) * EmpleadoFijo.INCREMENTO_TRIENIO;
+    @Override
+    public int calculaSueldo() {
+        return EmpleadoFijo.SALARIO_SEMANAL * this.trienios();
     }
     
     @Override

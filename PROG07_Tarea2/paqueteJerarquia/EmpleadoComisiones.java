@@ -20,7 +20,7 @@ public class EmpleadoComisiones extends Empleado{
 
     @Override
     public int calculaSueldo(){
-       return super.sueldo = (int)EmpleadoComisiones.ventas * EmpleadoComisiones.COMISION_VENTAS;
+       return (int)EmpleadoComisiones.ventas * EmpleadoComisiones.COMISION_VENTAS;
     }
     
     @Override
