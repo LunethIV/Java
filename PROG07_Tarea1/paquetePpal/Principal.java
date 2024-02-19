@@ -2,7 +2,6 @@
 package paquetePpal;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import paqueteSuper.*;
 import paqueteSub.*;
