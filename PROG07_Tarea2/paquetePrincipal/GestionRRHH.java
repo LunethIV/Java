@@ -48,7 +48,7 @@ public class GestionRRHH {
     
     public boolean busquedaEmpleadoNif(Nif nif){
         for(Empleado empleado:empleados){
-            if(empleado.getNif() == nif){
+            if(empleado.getNif() != null && empleado.getNif().equals(nif)){
                 return true;
             }
         }
@@ -81,15 +81,25 @@ public class GestionRRHH {
         }
         
         if(!empleadosFijos.isEmpty()){
-            System.out.println("EmpleadosFijos: "+empleadosFijos);
+            
+            for(Empleado empleado:empleadosFijos){
+            
+             System.out.println("EmpleadosFijos: "+empleado.getNombre());
+            }
         }
         
         if(!empleadosHoras.isEmpty()){
-            System.out.println("EmpleadoHoras: "+empleadosHoras);
+            for(Empleado empleado:empleadosHoras){
+            
+                System.out.println("EmpleadoHoras: "+empleado.getNombre());
+            }
         }
-      
+
         if(!empleadosComisiones.isEmpty()){
-            System.out.println("EmpleadoComisiones: "+empleadosComisiones);
+            for(Empleado empleado:empleadosComisiones){
+            
+                System.out.println("EmpleadoComisiones: "+empleado.getNombre());
+            }    
         }
     }
 
@@ -108,7 +118,7 @@ public class GestionRRHH {
             info += " SIN EMPLEADOS";
         }else{
             for(Empleado empleado:empleados){
-                info += "\n" + empleados.toString();
+                info += "\n" + empleado.toString();
             }
         }
         return info;

@@ -27,9 +27,9 @@ public class Nie {
         
         // Extraer la última letra y comprobar si coincide
         String letra = nieSinEspacios.substring(8);
-        int resto = Integer.parseInt(nieSinEspacios.substring(0,8)) % 23;
+        int resto = Integer.parseInt(nieSinEspacios.substring(1,8)) % 23;
         
-        if(letra.charAt(0) != LETRAS.charAt(resto)){
+        if(!LETRAS.contains(letra)){
             throw new IllegalArgumentException("Error, las letras no coinciden");
         }
         

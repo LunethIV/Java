@@ -23,6 +23,7 @@ public class Empleado {
         
         this.nie = nie;
         this.nif = nif;
+        this.nombre = nombre;
         this.apellidos = apellidos;
         this.fechaNac = fechaNac;
         this.fechaTrabajo = fechaTrabajo;
@@ -31,15 +32,16 @@ public class Empleado {
     
     // Métodos
     public String tiempoEmpresa(){
+        
         LocalDate fechaActual = LocalDate.now();
         
-        Period tiempo = Period.between(fechaTrabajo, fechaActual);
+        int tiempo = Period.between(fechaTrabajo, fechaActual).getYears();
         
-        LocalDate fecha = fechaActual.plus(tiempo);
-        
-        String fechaFinal = Fecha.fechaFormateada(fecha);
-        
-        return fechaFinal;
+        if(tiempo > 1){
+         return tiempo+" Años";   
+        }else{
+            return tiempo+" Año";
+        }
     }
     
     public int calculaSueldo(){

@@ -1,13 +1,13 @@
 
 package paqueteOtros;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 public class Fecha {
     
     public static String fechaFormateada(LocalDate fecha){
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/mm/yyyy");
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         
-        return formatoFecha.format(fecha);
+        return fecha.format(formato);
     }
 }
