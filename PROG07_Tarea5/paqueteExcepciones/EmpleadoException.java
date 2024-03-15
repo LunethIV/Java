@@ -5,7 +5,7 @@ package paqueteExcepciones;
 public class EmpleadoException extends Exception{
     
     public EmpleadoException(){
-        super("ERROR");
+        super("Empleado con errores");
     }
     
     public EmpleadoException(String msg){
