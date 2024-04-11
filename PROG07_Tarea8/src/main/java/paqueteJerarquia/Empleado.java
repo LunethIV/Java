@@ -186,7 +186,7 @@ public abstract class Empleado implements Premiable, Jubilable{
         
         int edad = periodo.getYears();
         
-        if(edad >= 65){
+        if(edad >= Empleado.EDAD_JUBILACION){
             jubilar();
             this.despedido = true;
         }else{

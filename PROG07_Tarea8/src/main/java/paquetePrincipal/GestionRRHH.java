@@ -42,6 +42,9 @@ public class GestionRRHH {
     public void despedirEmpleado(Empleado empleado){
         if(empleados.contains(empleado)){
             empleado.despedir();
+            if(despedidos == null){
+                despedidos = new ArrayList<Despedible>();                
+            }
             despedidos.add(empleado);
             empleados.remove(empleado);
         }else{
@@ -224,11 +227,17 @@ public class GestionRRHH {
             if(e instanceof EmpleadoHoras){
                 int extras = ((EmpleadoHoras) e).getNumHoras() - 40;
                 if(extras > numHorasExtra){
+                    if(incentivados == null){
+                        incentivados = new ArrayList<Incentivable>();
+                    }
                     incentivados.add((EmpleadoHoras) e);
                     e.premiar();
                 }
             }else if(e instanceof EmpleadoComisiones){
                 if(((EmpleadoComisiones) e).getVentas() > ventas){
+                    if(incentivados == null){
+                        incentivados = new ArrayList<Incentivable>();
+                    }
                     incentivados.add((EmpleadoComisiones) e);
                     e.premiar();
                 }
