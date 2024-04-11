@@ -1,13 +1,18 @@
 
 package paquetePrincipal;
 
-import java.util.ArrayList;
 import paqueteJerarquia.*;
 import paqueteExcepciones.*;
 import paqueteOtros.*;
 import paqueteInterfaces.*;
+import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.Map;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 
 public class GestionRRHH {
     
@@ -72,40 +77,55 @@ public class GestionRRHH {
     
     public float sueldoSemanalPlantilla(){
         float total = 0.0f;
-        
-        for(Empleado e:empleados){
-            total += e.calculaSueldo();
+        for(Map.Entry <String, Empleado> entrada: this.empleados.entrySet()){
+            float sueldo = entrada.getValue().getSueldo();
+            total += sueldo;
         }
-        
         return total;
     }
     
     public void listadoOrganizadoPlantilla(){
+        Collection<Empleado> coleccion = empleados.values();
         System.out.println("EMPLEADOS FIJOS");
-        for(Empleado e:empleados){
-            if(e instanceof EmpleadoFijo){
-                System.out.println("-"+e);
+        for(Empleado empleado:coleccion){
+            if(empleado instanceof EmpleadoFijo){
+                System.out.println("-"+empleado);
             }
         }
         
         System.out.println("EMPLEADOS HORAS");
-        for(Empleado e:empleados){
-            if(e instanceof EmpleadoHoras){
-                System.out.println("-"+e);
+        for(Empleado empleado:coleccion){
+            if(empleado instanceof EmpleadoHoras){
+                System.out.println("-"+empleado);
             }
         }
         
         System.out.println("EMPLEADOS COMISIONES");
-        for(Empleado e:empleados){
-            if(e instanceof EmpleadoComisiones){
-                System.out.println("-"+e);
+        for(Empleado empleado:coleccion){
+            if(empleado instanceof EmpleadoComisiones){
+                System.out.println("-"+empleado);
             }
         }
     }
     
     public void listadoAntiguedadPlantilla(){
-        for(Empleado e:empleados){
-            System.out.println(e.getNombre()+e.getApellidos()+e.tiempoEmpresa());
+        Collection<Empleado> coleccion = empleados.values(); // En esta línea se crea una colección que contiene clave y valor
+        List<Empleado> lista = new ArrayList<>(); // Creamos una lista vacía de tipo empleado
+        lista.addAll(coleccion); // Volcamos a la colección el contenido de la lista
+        Collections.sort(lista, new ComparadorFechaTrabajoEmpleado()); // Ordenamos el contenido de la lista mediante el método compare de la clase "ComparadorFechaTrabajoEmpleado"
+        for(Empleado e:lista){
+            if(e.getNif() != null){
+               System.out.println(e.getNif()+e.getNombre()+e.getApellidos()+e.tiempoEmpresa()); 
+            }else{
+               System.out.println(e.getNie()+e.getNombre()+e.getApellidos()+e.tiempoEmpresa()); 
+            }
+        }
+    }
+    
+    public class ComparadorFechaTrabajoEmpleado implements Comparator<Empleado>{
+        @Override
+        public int compare(Empleado o1, Empleado o2) {
+            return o1.getFechaTrabajo().compareTo(o2.getFechaTrabajo());
         }
     }
     
@@ -116,10 +136,12 @@ public class GestionRRHH {
         if(empleados.isEmpty()){
             return "SIN EMPLEADOS";
         }else{
-            for(Empleado e:empleados){
-                cadena += e;
+            Set<String> miset = empleados.keySet(); // Creamos un set con los valores de las claves de empleados (se almacenan en este las claves)
+            for(String e:miset){ // Se recorre el set que hemos creado
+                Empleado emp = empleados.get(e); // Buscamos el empleado por su clave (devuelveme el empleado cuya key sea esta)
+                cadena += emp;
             }
-        }       
+        }
         return cadena;
     }
     
