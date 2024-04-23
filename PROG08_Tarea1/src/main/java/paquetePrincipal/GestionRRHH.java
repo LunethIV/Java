@@ -3,7 +3,6 @@ package paquetePrincipal;
 
 import paqueteJerarquia.*;
 import paqueteExcepciones.*;
-import paqueteOtros.*;
 import paqueteInterfaces.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 
 public class GestionRRHH {
@@ -49,25 +49,25 @@ public class GestionRRHH {
     }
     
     public void addEmpleado(Empleado empleado){
-        if(empleados.containsKey(empleado.getNif().getNif())){
+        if(empleado.getNif() != null && empleados.containsKey(empleado.getNif().getNif())){
             System.out.println("El empleado introducido ya existe");
-        }else{
+        }else if(empleado.getNif() != null){
             empleados.put(empleado.getNif().getNif(), empleado);
         }
         
-        if(empleados.containsKey(empleado.getNie().getNie())){
+        if(empleado.getNie() != null && empleados.containsKey(empleado.getNie().getNie())){
             System.out.println("El empleado introducido ya existe");
-        }else{
+        }else if(empleado.getNie() != null){
             empleados.put(empleado.getNie().getNie(), empleado);
         }
     }
     
     public void despedirEmpleado(Empleado empleado){
-        if(empleados.containsKey(empleado.getNif().getNif())){
+        if(empleado != null && empleados.containsKey(empleado.getNif().getNif()) && !despedidos.contains(empleado)){
             empleado.despedir();
-            despedidos.add(empleado);       
-            empleados.remove(empleado.getNif().getNif());
-        }else if(empleado.isJubilado()){
+            despedidos.add(empleado);
+           // empleados.remove(empleado.getNif().getNif());
+        }else if(empleado != null && empleado.isJubilado() && !jubilados.contains(empleado)){
             jubilados.add(empleado);
         }
         else{
@@ -111,11 +111,11 @@ public class GestionRRHH {
     public void listadoAntiguedadPlantilla(){
         Collection<Empleado> coleccion = empleados.values(); // En esta línea se crea una colección que contiene clave y valor
         List<Empleado> lista = new ArrayList<>(); // Creamos una lista vacía de tipo empleado
-        lista.addAll(coleccion); // Volcamos a la colección el contenido de la lista
+        lista.addAll(coleccion); // Volcamos a la lista el contenido de la colección
         Collections.sort(lista, new ComparadorFechaTrabajoEmpleado()); // Ordenamos el contenido de la lista mediante el método compare de la clase "ComparadorFechaTrabajoEmpleado"
         for(Empleado e:lista){
             if(e.getNif() != null){
-               System.out.println(e.getNif()+e.getNombre()+e.getApellidos()+e.tiempoEmpresa()); 
+               System.out.println(e.getNif()+e.getNombre()+e.getApellidos()+e.tiempoEmpresa());
             }else{
                System.out.println(e.getNie()+e.getNombre()+e.getApellidos()+e.tiempoEmpresa()); 
             }
@@ -136,6 +136,7 @@ public class GestionRRHH {
         if(empleados.isEmpty()){
             return "SIN EMPLEADOS";
         }else{
+            empleados.keySet();
             Set<String> miset = empleados.keySet(); // Creamos un set con los valores de las claves de empleados (se almacenan en este las claves)
             for(String e:miset){ // Se recorre el set que hemos creado
                 Empleado emp = empleados.get(e); // Buscamos el empleado por su clave (devuelveme el empleado cuya key sea esta)
@@ -145,62 +146,68 @@ public class GestionRRHH {
         return cadena;
     }
     
-    public boolean busquedaEmpleado(Object object) throws IdException{
+    public boolean busquedaEmpleadoID(String clave) /*throws IdException*/{
+        return empleados.containsKey(clave);
+        
+        /*
         if(object == null){
-            throw new IdException("Error, object es null");
+        throw new IdException("Error, object es null");
         }else if(!(object instanceof Nif) && !(object instanceof Nie) && !(object instanceof String)){
-            throw new IdException("Error, object no es Nif, Nie o String");
+        throw new IdException("Error, object no es Nif, Nie o String");
         }
-        
         boolean encontrado = false;
-        
         if(object instanceof Nif){
-            Nif nif = (Nif) object;
-            for(Empleado e:empleados){
-                if(e.getNif() != null && e.getNif() == nif){
-                    encontrado = true;
-                }
-            }
+        Nif nif = (Nif) object;
+        for(Empleado emp:empleados){
+        if(emp.getNif() != null && emp.getNif() == nif){
+        encontrado = true;
+        }
+        }
         }else{
-            Nie nie = (Nie) object;
-            for(Empleado e:empleados){
-                if(e.getNie()!= null && e.getNie() == nie){
-                    encontrado = true;
-                }
-            }
+        Nie nie = (Nie) object;
+        for(Empleado emp:empleados){
+        if(emp.getNie()!= null && emp.getNie() == nie){
+        encontrado = true;
         }
-        
+        }        
+        }
         if(object instanceof String){
-            try{
-              Nif nif = new Nif((String) object);  
-            }catch(NifException e){
-              Nie nie = new Nie((String) object);
-            }           
+        try{
+        Nif nif = new Nif((String) object);
+        }catch(NifException emp){
+        Nie nie = new Nie((String) object);           
         }
-        
+        }        
         return encontrado;
+         */
     }
     
-    public Empleado devuelveEmpleado(Object object) throws IdException{
+    public Empleado devuelveEmpleado(String clave) /*throws IdException*/{
+        if(empleados.containsKey(clave)){
+            return empleados.get(clave); // Traeme el empleado que tenga esta clave dentro de mi array de empleado
+        }else{
+            return null;
+        }
+        /*
         if(object == null){
             throw new IdException("Error, object es null");
         }else if(!(object instanceof Nif) && !(object instanceof Nie) && !(object instanceof String)){
             throw new IdException("Error, object no es Nif, Nie o String");
         }
 
-        Empleado e = null;
+        Empleado emp = null;
         if(object instanceof Nif){
             Nif nif = (Nif) object;
             for(Empleado a:empleados){
                 if(a.getNif()!= null && a.getNif() == nif){
-                    e = a;
+                    emp = a;
                 }
             }
         }else if(object instanceof Nie){
             Nie nie = (Nie) object;
             for(Empleado a:empleados){
                 if(a.getNie()!= null && a.getNie() == nie){
-                    e = a;
+                    emp = a;
                 }
             }
         }
@@ -213,16 +220,26 @@ public class GestionRRHH {
             }            
         }
         
-        return e;
+        return emp;
+        */
     }
     
-    public int sumaVentasEmpleados(){
+    public int sumaVentasEmpleados() throws VentasException{
         int suma = 0;
         
-        for(Empleado e:empleados){
+        for(Empleado e:empleados.values()){
             if(e instanceof EmpleadoComisiones){
+                suma += ((EmpleadoComisiones)e).getVentas();
+            }
+        }
+        return suma;
+        /*
+        int suma = 0;
+        
+        for(Empleado emp:empleados){
+            if(emp instanceof EmpleadoComisiones){
                 try{
-                   suma += ((EmpleadoComisiones) e).getVentas(); 
+                   suma += ((EmpleadoComisiones) emp).getVentas(); 
                 }catch(VentasException ex){
                     System.out.println("Error en el método sumaVentasEmpleados");
                 }         
@@ -230,20 +247,18 @@ public class GestionRRHH {
         }
         
         return suma;
+        */
     }
     
-    public void listaEmpleadosHorasExtras(){
+    public void listaEmpleadosHorasExtras() throws NumHorasException{
         int horas = 0;
         
-        for(Empleado e:empleados){
+        for(Map.Entry<String, Empleado> e:empleados.entrySet()){    
+            
             if(e instanceof EmpleadoHoras){
-                try{
-                    horas = (((EmpleadoHoras) e).getNumHoras() - 40);
-                }catch(NumHorasException ex){
-                    System.out.println("Error en ListaEmpleadosHoras");
-                }
+                horas = (((EmpleadoHoras) e).getNumHoras() - 40);
                 if(horas > 0){
-                    System.out.println("-"+e);
+                    System.out.println("-"+e.getKey()+e.getValue());
                 }
             }
         }
@@ -252,68 +267,178 @@ public class GestionRRHH {
     public void listaEmpleadosFijosTrienios(){
         int trienios = 0;
         
-        for(Empleado e:empleados){
+        for(Map.Entry<String,Empleado> e:empleados.entrySet()){
             if(e instanceof EmpleadoFijo){
                 trienios = ((EmpleadoFijo) e).trienios();
-            }
-            if(trienios > 0){
-                System.out.println("-"+e);
+                if(trienios > 0){
+                    System.out.println("-"+e.getKey()+e.getValue());
+                }
             }
         }
     }
     
     public void empleadosAIncentivar(int numHorasExtra, double ventas) throws NumHorasException, VentasException{
-        for(Empleado e:empleados){
+        for(Map.Entry<String,Empleado> e:empleados.entrySet()){
             if(e instanceof EmpleadoHoras){
                 int extras = ((EmpleadoHoras) e).getNumHoras() - 40;
                 if(extras > numHorasExtra){
-                    if(incentivados == null){
-                        incentivados = new ArrayList<Incentivable>();
-                    }
                     incentivados.add((EmpleadoHoras) e);
-                    e.premiar();
+                    ((EmpleadoHoras) e).premiar();
                 }
             }else if(e instanceof EmpleadoComisiones){
                 if(((EmpleadoComisiones) e).getVentas() > ventas){
-                    if(incentivados == null){
-                        incentivados = new ArrayList<Incentivable>();
-                    }
                     incentivados.add((EmpleadoComisiones) e);
-                    e.premiar();
+                    ((EmpleadoHoras) e).premiar();
                 }
             }
         }
     }
     
     public void EmpleadosIncentivados(){
-        for(Empleado e:empleados){
+        for(Map.Entry<String,Empleado> e:empleados.entrySet()){
             if(e instanceof EmpleadoHoras){
                 if(((EmpleadoHoras) e).isIncentivado()){
-                    System.out.println("-"+e.getNombre()+" "+e.getApellidos());
+                    System.out.println("-"+e.getKey()+" "+((EmpleadoHoras) e).getApellidos()+" "+((EmpleadoHoras) e).getSueldo());
                 }
             }else if(e instanceof EmpleadoComisiones){
                 if(((EmpleadoComisiones) e).isIncentivado()){
-                    System.out.println("-"+e.getNombre()+" "+e.getApellidos());
+                    System.out.println("-"+e.getKey()+" "+((EmpleadoComisiones) e).getApellidos()+" "+((EmpleadoComisiones) e).getSueldo());
                 }
             }
         }
     }
     
     public void EmpleadosDespedidos(){
-        for(Empleado e:empleados){
-            if(e instanceof EmpleadoFijo){
-                if(e.isDespedido()){
-                    System.out.println("-"+e.getNombre()+" "+e.getApellidos()+" "+e.getSueldo());
+        for(Map.Entry<String,Empleado> e:empleados.entrySet()){
+            Empleado emp = e.getValue();
+            if(emp instanceof EmpleadoFijo){
+                if(((EmpleadoFijo) emp).isDespedido()){
+                    System.out.println("-"+((EmpleadoFijo) emp).getNombre()+" "+((EmpleadoFijo) emp).getApellidos()+" "+((EmpleadoFijo) emp).getSueldo());
                 }
-            }else if(e instanceof EmpleadoHoras){
-                if(e.isDespedido()){
-                    System.out.println("-"+e.getNombre()+" "+e.getApellidos()+" "+e.getSueldo());
+            }else if(emp instanceof EmpleadoHoras){
+                if(((EmpleadoHoras) emp).isDespedido()){
+                    System.out.println("-"+((EmpleadoHoras) emp).getNombre()+" "+((EmpleadoHoras) emp).getApellidos()+" "+((EmpleadoHoras) emp).getSueldo());
                 }
-            }else if(e instanceof EmpleadoComisiones){
-                if(e.isDespedido()){
-                    System.out.println("-"+e.getNombre()+" "+e.getApellidos()+" "+e.getSueldo());
+            }else if(emp instanceof EmpleadoComisiones){
+                if(((EmpleadoComisiones) emp).isDespedido()){
+                    System.out.println("-"+((EmpleadoComisiones) emp).getNombre()+" "+((EmpleadoComisiones) emp).getApellidos()+" "+((EmpleadoComisiones) emp).getSueldo());
                 }
             }
+        }
+    }
+    
+    public void listaOrdenadaApellidosNombrePlantilla(char i){
+        Collection<Empleado> coleccion = empleados.values();
+        List<Empleado> lista = new ArrayList<>();
+        lista.addAll(coleccion);
+        
+        if(Character.isUpperCase(i)){           
+            Collections.sort(lista, new ComparadorApellidosNombreEmpleado().reversed());
+        }else{
+            Collections.sort(lista, new ComparadorApellidosNombreEmpleado());
+        }
+        for(Empleado e:lista){            
+            System.out.println(e.getNif()+" "+e.getApellidos()+" "+e.getNombre()+" "+e.getEDAD_JUBILACION()+" "+e.getSueldo());
+        }
+    }
+    
+    public class ComparadorApellidosNombreEmpleado implements Comparator<Empleado>{
+        @Override
+        public int compare(Empleado e1, Empleado e2){
+            return (e1.getApellidos()+e1.getNombre()).compareTo(e2.getApellidos()+e2.getNombre());
+        }
+    }
+    
+    public void listaOrdenadaSueldoPlantilla(char i){
+        Collection<Empleado> coleccion = empleados.values();
+        List<Empleado> lista = new ArrayList<>();
+        lista.addAll(coleccion);
+        Collections.sort(lista, new ComparadorSueldo());
+        ListIterator iterador = lista.listIterator();
+        if(Character.isUpperCase(i)){
+            while(iterador.hasPrevious()){ // Mientras haya elementos en la colección
+                System.out.println(iterador.previous());
+            }
+        }else{
+            while(iterador.hasNext()){    
+                System.out.println(iterador.next());
+            }
+        }
+    }
+    
+    public class ComparadorSueldo implements Comparator<Empleado>{
+        @Override
+        public int compare(Empleado e1, Empleado e2){
+            return Float.compare(e1.getSueldo(),e2.getSueldo());
+        }
+    }
+    
+    public void listaOrdenadaEdadApellidosNombrePlantilla(){
+        Collection<Empleado> coleccion = empleados.values();
+        List<Empleado> lista = new ArrayList<>();
+        lista.addAll(coleccion);
+        Collections.sort(lista, new ComparadorEdadApellidosNombreEmpleado());
+        
+        for(Empleado e:lista){
+            System.out.println(e.edad());
+        }
+    }
+    
+    public class ComparadorEdadApellidosNombreEmpleado implements Comparator<Empleado>{
+        @Override
+        public int compare(Empleado e1, Empleado e2){
+        // return e1.edad() != e2.edad() ?  Integer.compare(e1.edad(), e2.edad()) : (e1.getApellidos()+e1.getNombre()).compareTo(e2.getApellidos()+e2.getNombre());
+        // Si la edad del primer empleado no es igual que la del segundo, compara por edad, de lo contrario, por nombre+apellido
+            
+            if(e1.edad() != e2.edad()){
+               return e1.edad() - e2.edad();
+            }else{
+                return (e1.getApellidos()+e1.getNombre()).compareTo(e2.getApellidos()+e2.getNombre());
+            }
+        }
+    }
+    
+    public void ListaOrdenadaEmpleadosHoras(){
+        Collection<Empleado> coleccion = empleados.values();
+        List<EmpleadoHoras> lista = new ArrayList<>();
+        for(Empleado e:coleccion){
+            if(e instanceof EmpleadoHoras){
+                lista.add((EmpleadoHoras)e);
+            }
+        }
+        Collections.sort(lista); // Para poder usar sort, debe usarse un elemento de una clase que implemente Comparable
+        
+        for(Empleado e:lista){
+            System.out.println(e);
+        }
+    }
+    
+    public void listaOrdenadaEmpleadosComisiones(){
+        Collection<Empleado> coleccion = empleados.values();
+        List<EmpleadoComisiones> lista = new ArrayList<>();
+        for(Empleado e:coleccion){
+            if(e instanceof EmpleadoComisiones){
+                lista.add((EmpleadoComisiones)e);
+            }
+        }
+        Collections.sort(lista); // Para poder usar sort, debe usarse un elemento de una clase que implemente Comparable
+        
+        for(Empleado e:lista){
+            System.out.println(e);
+        }
+    }
+    
+    public void ListaEmpleadosDespedidosNoJubilados(){
+        ArrayList<Despedible> despedidosCopia = new ArrayList<>();
+        despedidosCopia.addAll(despedidos);
+        for(Empleado e:empleados.values()){
+            if(e.isJubilado()){
+                despedidosCopia.remove(e);
+            }
+        }
+        
+        for(Despedible e:despedidosCopia){
+            System.out.println(e);
         }
     }
 }

@@ -73,7 +73,16 @@ public class Principal {
             System.out.println(ex.getMessage());
         }
         
-        // d) Se añaden uno a uno los empleados en la Gestión de Recursos Humanos hero, en el caso de que haya algún null NO se añade.
+        // d) Crea un empleado duplicado
+        EmpleadoFijo raul = null;
+        
+        try{
+            raul = new EmpleadoFijo(new Nif("00000001R"), "Raimundo", "Muñoz",LocalDate.of(1999, 04, 20),LocalDate.of(2017, 04, 20));
+        }catch(IdException ex){
+            System.out.println(ex.getMessage());
+        }
+        
+        // e) Se añaden uno a uno los empleados en la Gestión de Recursos Humanos hero, en el caso de que haya algún null NO se añade.
         if(rai != null){
             Hero.addEmpleado(rai); 
         }
@@ -98,58 +107,104 @@ public class Principal {
             Hero.addEmpleado(raquel);
         }
 
-        // e) Muestra el objeto hero.
-        System.out.println("Hero:");
+        if(raul != null){
+            Hero.addEmpleado(raul);
+        }
+        
+        // f) Muestra el objeto hero.
+        System.out.println("Muestra el objeto hero. F"); // No se ha añadido el empleado repetido
         System.out.println(Hero);
         System.out.println("____________________________________");
 
-        // f) Se desea mostar un listado organizado de la plantilla de hero.
+        // g) Muestra el sueldo total a pagar por la empresa Hero
+        Hero.sueldoSemanalPlantilla();
+        
+        // h) Se desea mostar un listado organizado de la plantilla de hero.
         Hero.listadoOrganizadoPlantilla();
         
         /*
-           g) Se desea saber el nombre y los apellidos del empleado cuyo nif es “22345679-
+           i) Se desea saber el nombre y los apellidos del empleado cuyo nif es “22345679-
             Y” (para el caso de que esté dado de alta en la plantilla de empleados de hero,
             puede ser que el método devuelva null). Recuerda que el método envía una
             excepción del tipo IdException.
         */
-        try{
-            Hero.busquedaEmpleado(new Nif("22345679Y"));
-        }catch(IdException ex){
-            System.out.println(ex.getMessage());
-        }
+           Hero.busquedaEmpleadoID("22345679Y");  
         
-        // h) Se desea mostrar un listado de empleados con la información: nombre, apellidos y tiempo de antigüedad de hero.
+        // j) Se desea mostrar un listado de empleados con la información: nombre, apellidos y tiempo de antigüedad de hero.
         Hero.listadoAntiguedadPlantilla();
         
         // i) Se desea despedir al empleado rai en hero.
         Hero.despedirEmpleado(rai);
         
-        // j) Muestra la información completa de la empresa hero.
+        // k) Muestra la información completa de la empresa hero.
         System.out.println(Hero);
         
-        // k) Muestra la suma de las ventas realizadas por los empleados de la plantilla de hero que van por comisiones.
-        Hero.sumaVentasEmpleados();
+        // l) Muestra la suma de las ventas realizadas por los empleados de la plantilla de hero que van por comisiones.
+        try {            
+            Hero.sumaVentasEmpleados();
+        } catch (VentasException ex) {
+            System.out.println(ex.getMessage());
+        }
         
-        // l) Muestra toda la información de empleados de la plantilla de hero que han realizado horas extras.
-        Hero.listaEmpleadosHorasExtras();
+        // m) Muestra toda la información de empleados de la plantilla de hero que han realizado horas extras.
+        try {            
+            Hero.listaEmpleadosHorasExtras();
+        } catch (NumHorasException ex) {
+            System.out.println(ex.getMessage());
+        }
         
-        // m) Muestra toda la información de empleados fjos de la plantilla de hero que tienen al menos un trienio.
+        // n) Muestra toda la información de empleados fjos de la plantilla de hero que tienen al menos un trienio.
         Hero.listaEmpleadosFijosTrienios();
         
-        // n) Se desea incentivar a empleados, con horas extras superiores a 4 y/o con ventas superiores a 4200€.
+        // o) Se desea incentivar a empleados, con horas extras superiores a 4 y/o con ventas superiores a 4200€.
         try{
             Hero.empleadosAIncentivar(4, 4200);
         }catch(NumHorasException | VentasException ex){
             System.out.println(ex.getMessage());
         }
         
-        // o) Muestra nombre, apellidos y sueldo de aquellos empleados que han sido incentivados.
+        // p) Muestra nombre, apellidos y sueldo de aquellos empleados que han sido incentivados.
         Hero.EmpleadosIncentivados();
         
-        // p) Se desea despedir al empleado rai en hero.
+        /*
+        Muestra la plantilla de hero ordenada por Sueldo de menor a mayor, y cuál es el
+        empleado (apellidos, nombre, edad y sueldo) con menor sueldo y la misma
+        información para el empleado con mayor sueldo.
+        */
+        Hero.listaOrdenadaSueldoPlantilla('I');
+        
+        /*
+        Muestra la plantilla de hero ordenada por Apellidos + Nombre de menor a mayor.
+        */                  
+        Hero.listaOrdenadaApellidosNombrePlantilla('I');
+               
+        /*
+        s) Muestra la plantilla de hero ordenada por Apellidos + Nombre de mayor a menor.
+        */
+        Hero.listaOrdenadaApellidosNombrePlantilla('i');
+        
+        // t) Muestra todos los empleados por horas de hero, ordenada de forma creciente por las horas trabajadas.
+        Hero.ListaOrdenadaEmpleadosHoras();
+        
+        // u) Muestra todos los empleados por comisiones de hero, ordenada de forma creciente por las ventas.
+        Hero.listaOrdenadaEmpleadosComisiones();
+        
+        // v) Se desea despedir al empleado rai en hero.
         Hero.despedirEmpleado(rai);
         
-        // q) Muestra nombre y apellidos de los empleados despedidos.
+        // w) Se despide al empleado kevin de la plantilla de hero.
+        Hero.despedirEmpleado(kevin);
+        
+        // x) Muestra nombre y apellidos de los empleados despedidos (indica el tipo de Empleado).
+        Hero.EmpleadosDespedidos();
+        
+        // y) Se muestra la lista de todos los empleados despedidos que NO se han jubilado.
+        Hero.ListaEmpleadosDespedidosNoJubilados();
+        
+        // z) Muestra los empleados actuales en plantilla hero.
+        Hero.listadoOrganizadoPlantilla();
+        
+        // aa) Muestra los empleados despedidos y comprueba que están todos.
         Hero.EmpleadosDespedidos();
     }
 }
