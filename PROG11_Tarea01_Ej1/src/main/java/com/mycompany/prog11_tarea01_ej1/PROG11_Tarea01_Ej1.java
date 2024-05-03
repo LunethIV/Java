@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class PROG11_Tarea01_Ej1 {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-            String jdbcUrl = "jdbc:postgresql://localhost:5432/database_name";
+            String jdbcUrl = "jdbc:postgresql://localhost:5432/RRHH";
             String username = "postgres";
             String password = "1234";
 
