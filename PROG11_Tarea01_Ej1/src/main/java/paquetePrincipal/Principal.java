@@ -1,10 +1,6 @@
 
 package paquetePrincipal;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -28,7 +24,7 @@ public class Principal {
             System.out.println("----- MENÚ DE BASE DATOS: EMPLEADOS -----");
             System.out.println("1. Listado de todos los empleados (id, nombre, sueldo) ordenados por id usando next().");
             System.out.println("2. Listado de todos los empleados sin orden usando previous() y después next()");
-            System.out.println("3. Listado de todos los empleados indicando número de fila y total de empleados.");
+            System.out.println("3. Listado de todos los empleados indicando número de fila y total de empleados.");          
             System.out.println("4. Búsqueda de un empleado por id (sin parametrizar)");
             System.out.println("5. Búsqueda de un empleado por id (parametrizado)");
             System.out.println("6. Listado de todos los empleados con sueldo > 1000€ cuyo nombre contenga ‘c’ (sin parametrizar)");
@@ -42,8 +38,12 @@ public class Principal {
             switch(opcion){
                 case 1 -> conexion.listadoEmpleadosID();
                 case 2 -> conexion.listadoEmpleadosSinOrden();
-            }
-          
+                case 3 -> conexion.listadoConNumFilas();
+                case 4 -> conexion.busquedaEmpleadoIDnoPara(222);
+                case 5 -> conexion.busquedaEmpleadoIDPara(333);
+                case 6 -> conexion.listadoEmpleadosSueldoLetraCsinPara();
+                case 7 -> conexion.d();
+            }          
         }while(opcion != 11);        
     }
 }
