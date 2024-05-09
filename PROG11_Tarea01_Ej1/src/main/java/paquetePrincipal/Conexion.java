@@ -150,6 +150,7 @@ public class Conexion {
         try{
             PreparedStatement sentencia = conexion.prepareStatement(select);
             ResultSet consulta = sentencia.executeQuery();
+            System.out.println("Consulta: "+select); 
             System.out.println("----- EMPLEADO SUELDO > 1000 Y CONTIENE 'c'");
             if(!consulta.next()){
                 System.out.println("Ningún empleado cumple los requisitos especificados");
@@ -163,7 +164,7 @@ public class Conexion {
         }
     }
     
-        public void d(){
+    public void prueba(){
         
         String select = "SELECT nombre FROM EMPLEADOS WHERE sueldo > 1000 AND nombre LIKE '%u%'";
         
@@ -188,6 +189,36 @@ public class Conexion {
             }         
         }catch(SQLException ex){
             System.out.println("Error en la consulta: "+select);
+        }
+    }
+    
+    public void modificarNombre(String nombre){
+        
+        String update = "UPDATE EMPLEADOS SET nombre = '"+nombre+"' WHERE id = 100";
+        
+        try{
+            PreparedStatement sentencia = conexion.prepareStatement(update);
+            int filas = sentencia.executeUpdate();
+            
+            if(filas == 1){
+                System.out.println("Modificación realizada con éxito");
+            }else{
+                System.out.println("Error, ese id no existe");
+            }
+        }catch(SQLException ex){
+            System.out.println("Update mal formado: "+update);
+        }
+    }
+    
+    public void crearTabla(){
+        
+        String create = "CREATE TABLE EmplHoras ("+"id INT NOT NULL,"+"nombre VARCHAR(45) NOT NULL,"+"horas INT NULL,"+"horasExtras INT NULL,"+"sueldo DECIMAL NULL";
+        
+        try{
+            PreparedStatement sentencia = conexion.prepareStatement(create);
+            ResultSet consulta = sentencia.executeUpdate();
+        }catch(SQLException ex){
+            System.out.println("Error al crear la tabla: "+create);
         }
     }
 }

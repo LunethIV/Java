@@ -33,7 +33,7 @@ public class Principal {
             System.out.println("9. Crea una tabla: EmplHoras con los campos: id, nombre, horas, horasExtra y sueldo.");
             System.out.println("10. Guarda en la tabla: EmplHoras toda la información de los empleados por horas.");
             System.out.println("11. Salir.");
-            opcion = sc.nextInt();     
+            opcion = sc.nextInt();
             
             switch(opcion){
                 case 1 -> conexion.listadoEmpleadosID();
@@ -42,8 +42,9 @@ public class Principal {
                 case 4 -> conexion.busquedaEmpleadoIDnoPara(222);
                 case 5 -> conexion.busquedaEmpleadoIDPara(333);
                 case 6 -> conexion.listadoEmpleadosSueldoLetraCsinPara();
-                case 7 -> conexion.d();
-            }          
-        }while(opcion != 11);        
+                case 7 -> conexion.prueba();
+                case 8 -> conexion.modificarNombre("Manolo");
+            }
+        }while(opcion != 11);
     }
 }
